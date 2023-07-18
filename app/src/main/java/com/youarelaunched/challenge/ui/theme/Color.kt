@@ -18,13 +18,15 @@ val LightColorsPalette = VendorAppColors(
     text = GraySecondary,
     textDark = GrayPrimary,
     textLight = Color.White,
+    textError = Green,
     buttonSelected = Green,
     buttonUnselected = Color.White,
     background = Background,
     chipsBackground = Color.White,
     snackBarBackground = GrayPrimary,
     shadowColor = GraySecondary,
-    iconColor = GrayThirty
+    iconColor = GrayThirty,
+    progressColor = Green
 )
 
 @Stable
@@ -32,6 +34,7 @@ data class VendorAppColors(
     val text: Color,
     val textDark: Color,
     val textLight: Color,
+    val textError: Color,
 
     val buttonSelected: Color,
     val buttonUnselected: Color,
@@ -41,7 +44,8 @@ data class VendorAppColors(
     val snackBarBackground: Color,
 
     val shadowColor: Color,
-    val iconColor: Color
+    val iconColor: Color,
+    val progressColor: Color
 )
 
 internal val LocalVendorAppColors = staticCompositionLocalOf<VendorAppColors> {

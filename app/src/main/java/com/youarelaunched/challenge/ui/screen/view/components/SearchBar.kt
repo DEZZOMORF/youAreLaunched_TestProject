@@ -3,12 +3,10 @@ package com.youarelaunched.challenge.ui.screen.view.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -48,9 +46,12 @@ fun SearchBar(modifier: Modifier = Modifier, onSearch: (String) -> Unit) {
     ) {
         TextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = {
+                text = it
+                onSearch(it)
+            },
             placeholder = { SearchBarPlaceholder() },
-            trailingIcon = { SearchBarTrailingIcon { onSearch(text) } },
+            trailingIcon = { SearchBarTrailingIcon() },
             shape = shape,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = Color.White,
@@ -64,7 +65,6 @@ fun SearchBar(modifier: Modifier = Modifier, onSearch: (String) -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = {
-                onSearch(text)
                 focusManager.clearFocus()
             })
         )
@@ -76,20 +76,15 @@ fun SearchBarPlaceholder() {
     Text(
         text = "Search...",
         color = VendorAppTheme.colors.text,
-        style = VendorAppTheme.typography.h6,
+        style = VendorAppTheme.typography.body1,
     )
 }
 
 @Composable
-fun SearchBarTrailingIcon(onSearch: () -> Unit) {
-    IconButton(
-        modifier = Modifier.size(24.dp),
-        onClick = { onSearch() }
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Search,
-            contentDescription = null
-        )
-    }
+fun SearchBarTrailingIcon() {
+    Icon(
+        imageVector = Icons.Filled.Search,
+        contentDescription = null
+    )
 }
 
