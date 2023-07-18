@@ -4,5 +4,5 @@ import com.youarelaunched.challenge.data.network.models.NetworkVendor
 
 interface ApiVendors {
 
-    suspend fun getVendors(): List<NetworkVendor>
+    suspend fun getVendors(filter: String): List<NetworkVendor>
 }

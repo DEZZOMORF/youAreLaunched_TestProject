@@ -27,14 +27,13 @@ class VendorsVM @Inject constructor(
         getVendors()
     }
 
-    fun getVendors() {
+    fun getVendors(filter: String = "") {
         viewModelScope.launch {
             _uiState.update {
                 it.copy(
-                    vendors = repository.getVendors()
+                    vendors = repository.getVendors(filter)
                 )
             }
         }
     }
-
 }

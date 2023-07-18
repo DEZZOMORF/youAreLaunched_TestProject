@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 
 private val GrayPrimary = Color(0xFF575757)
 private val GraySecondary = Color(0xFF949494)
+private val GrayThirty = Color(0xFFDFDFDF)
 private val Background = Color(0xFFFCFCFC)
 private val Green = Color(0xFF55C595)
 
@@ -21,7 +22,9 @@ val LightColorsPalette = VendorAppColors(
     buttonUnselected = Color.White,
     background = Background,
     chipsBackground = Color.White,
-    snackBarBackground = GrayPrimary
+    snackBarBackground = GrayPrimary,
+    shadowColor = GraySecondary,
+    iconColor = GrayThirty
 )
 
 @Stable
@@ -35,7 +38,10 @@ data class VendorAppColors(
 
     val background: Color,
     val chipsBackground: Color,
-    val snackBarBackground: Color
+    val snackBarBackground: Color,
+
+    val shadowColor: Color,
+    val iconColor: Color
 )
 
 internal val LocalVendorAppColors = staticCompositionLocalOf<VendorAppColors> {

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.youarelaunched.challenge.ui.screen.state.VendorsScreenUiState
 import com.youarelaunched.challenge.ui.screen.view.components.ChatsumerSnackbar
+import com.youarelaunched.challenge.ui.screen.view.components.SearchBar
 import com.youarelaunched.challenge.ui.screen.view.components.VendorItem
 import com.youarelaunched.challenge.ui.theme.VendorAppTheme
 
@@ -23,17 +24,28 @@ fun VendorsRoute(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    VendorsScreen(uiState = uiState)
+    VendorsScreen(
+        uiState = uiState,
+        searchAction = viewModel::getVendors
+    )
 }
 
 @Composable
 fun VendorsScreen(
-    uiState: VendorsScreenUiState
+    uiState: VendorsScreenUiState,
+    searchAction: (String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         backgroundColor = VendorAppTheme.colors.background,
-        snackbarHost = { ChatsumerSnackbar(it) }
+        snackbarHost = { ChatsumerSnackbar(it) },
+        topBar = {
+            SearchBar(
+                modifier = Modifier
+                    .padding(top = 24.dp, start = 16.dp, end = 16.dp),
+                onSearch = { searchAction(it) }
+            )
+        }
     ) { paddings ->
         if (!uiState.vendors.isNullOrEmpty()) {
             LazyColumn(
