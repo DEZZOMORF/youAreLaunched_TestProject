@@ -34,7 +34,7 @@ buildscript {
         ]
 
         composeUiVersion = "1.2.0-rc03"
-        conposeCompillerVersion = "1.3.0"
+        conposeCompillerVersion = "1.4.0"
         compose = [
                 //Compose activity RN https://developer.android.com/jetpack/androidx/releases/activity#version_160_3
                 activity        : "androidx.activity:activity-compose:1.6.0",
@@ -79,6 +79,6 @@ buildscript {
 plugins {
     id 'com.android.application' version '7.3.0' apply false
     id 'com.android.library' version '7.3.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
+    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
     id 'org.jetbrains.kotlin.jvm' version '1.7.10' apply false
 }

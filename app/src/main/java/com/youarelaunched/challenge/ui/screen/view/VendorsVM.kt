@@ -1,5 +1,6 @@
 package com.youarelaunched.challenge.ui.screen.view
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.youarelaunched.challenge.data.repository.VendorsRepository
@@ -8,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
@@ -19,6 +21,8 @@ import javax.inject.Inject
 class VendorsVM @Inject constructor(
     private val repository: VendorsRepository
 ) : ViewModel() {
+
+    private val TAG = this::class.java.simpleName
 
     private val _uiState: MutableStateFlow<VendorsScreenUiState> =
         MutableStateFlow(VendorsScreenUiState.Loading)
@@ -36,10 +40,11 @@ class VendorsVM @Inject constructor(
             .debounce(500)
             .filter { it.length >= 3 || it.isEmpty() }
             .map { getVendors(it) }
+            .catch { e -> Log.e(TAG, "${e.message}") }
             .launchIn(viewModelScope)
     }
 
-    private fun getVendors(filter: String = "") {
+    fun getVendors(filter: String = "") {
         _uiState.value = VendorsScreenUiState.Loading
         viewModelScope.launch {
             _uiState.value = VendorsScreenUiState.Success(repository.getVendors(filter))
