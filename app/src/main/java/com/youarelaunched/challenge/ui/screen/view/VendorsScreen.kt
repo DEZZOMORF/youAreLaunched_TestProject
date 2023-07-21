@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +27,7 @@ import com.youarelaunched.challenge.ui.theme.VendorAppTheme
 fun VendorsRoute(
     viewModel: VendorsVM
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState
 
     VendorsScreen(
         uiState = uiState,
